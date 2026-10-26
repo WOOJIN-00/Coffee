@@ -851,6 +851,7 @@ button { cursor: pointer; }
 .quest-sec.hint { border-left-color: var(--gold); background: rgba(255, 194, 74, .14); border-radius: 0 8px 8px 0; }
 .quest-sec.hint h4 { color: #9A6412; }
 .quest-note { margin: 2px 0 0; font-size: 14px; color: #7A4A12; }
+.quest-play { margin: 0; font-size: 16px; line-height: 1.7; color: #5A3A22; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

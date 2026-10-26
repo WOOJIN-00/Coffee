@@ -403,14 +403,17 @@
     var p = DATA.problems[ch - 1][no - 1];
     $('#quest-eyebrow').textContent = c.id + '장 ' + c.name + ' · 문제 ' + p.no + ' / ' + MAX + (solved ? ' · 해결 완료' : '');
     $('#quest-title').textContent = p.title || '문제 준비 중';
-    var body = hasCard(p) ? questCard(p)
-      : '<p>' + (p.desc ? esc(p.desc) : '아직 문제 내용이 정해지지 않았습니다.') + '</p>';
-    var tail = solved ? '<p class="quest-note">이미 뚫은 세이브 포인트입니다.</p>'
-      : p.flagHash ? '' : '<p class="quest-note">테스트 플래그 <code>test</code>를 입력하면 몬스터를 공격할 수 있습니다.</p>';
-    $('#quest-desc').innerHTML = body + tail;
     // http(s) 주소만 허용한다
     var frame = $('#quest-frame');
     var ok = typeof p.url === 'string' && /^https?:\/\//i.test(p.url);
+    // 풀이 페이지가 있으면 아래 창이 상황·미션·힌트를 담으므로 모달은 간단히 안내만, 없으면 설명 카드를 보여 준다
+    var body = ok
+      ? '<p class="quest-play">' + (p.flavor ? esc(p.flavor) + ' ' : '') + '아래 창에서 직접 풀어 보세요. 찾아낸 FLAG를 게임 입력칸에 넣으면 공격이 적중합니다.</p>'
+      : hasCard(p) ? questCard(p)
+        : '<p>' + (p.desc ? esc(p.desc) : '아직 문제 내용이 정해지지 않았습니다.') + '</p>';
+    var tail = solved ? '<p class="quest-note">이미 뚫은 세이브 포인트입니다.</p>'
+      : p.flagHash ? '' : '<p class="quest-note">테스트 플래그 <code>test</code>를 입력하면 몬스터를 공격할 수 있습니다.</p>';
+    $('#quest-desc').innerHTML = body + tail;
     frame.hidden = !ok;
     frame.src = ok ? p.url : 'about:blank';
     $('#quest-box').classList.toggle('wide', ok);

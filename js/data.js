@@ -72,6 +72,10 @@ window.GAME_DATA = {
  * - flagHash 는 COFFEE{...} 플래그의 SHA-256. 평문 플래그는 저장소에 두지 않는다(PDF 안에만 있음).
  */
 (function () {
+  // 게임과 문제를 한 서버에서 내보내므로 접속한 주소를 그대로 쓴다 (파일로 직접 열었을 때만 로컬 서버 주소)
+  var CH1_SERVER = (/^https?:/.test(location.protocol) ? location.origin : 'http://localhost:3000') + '/ch1/';
+  // 실제 풀이 페이지(server/ch1)가 준비된 문제 번호. 준비된 문제만 '문제보기'에 페이지를 띄운다.
+  var CH1_READY = { 1: true };
   // [카테고리, 공격명(제목), 난이도, 데미지, 한 줄 도발, 상황, 미션, 공략 힌트, 플래그 해시]
   var CH1 = [
     ['UNION SELECT', '검색창 UNION 탈취', '초급', 10,
@@ -146,7 +150,8 @@ window.GAME_DATA = {
     p.mission = q[6];
     p.hint = q[7];
     p.desc = q[4] + ' — ' + q[5];
-    p.url = '';
+    // 준비된 문제는 문제보기 창에 실제 풀이 페이지를 띄운다. 아직 준비 안 된 문제는 설명 카드만 보여 준다.
+    p.url = CH1_READY[p.no] ? CH1_SERVER + p.no + '/play' : '';
     p.flagHash = q[8];
   });
 })();

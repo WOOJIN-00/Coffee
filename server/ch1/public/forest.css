@@ -1,0 +1,63 @@
+:root {
+  --bark: #2E1C0E;
+  --wood: #4A3220;
+  --leaf: #4E7C3A;
+  --leaf-dk: #2F5222;
+  --cherry: #C2302A;
+  --gold: #E7A935;
+  --paper: #F4ECDC;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--bark); font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; line-height: 1.6; }
+a { color: inherit; }
+
+/* 위쪽 안내 띠: 장·문제·상황·미션·힌트·목표 */
+.banner { padding: 16px 24px 14px; background: linear-gradient(#20160c, #2f2114); color: var(--paper); }
+.banner p { margin: 0 0 6px; }
+.eyebrow { color: var(--gold); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+.flavor { margin: 2px 0 10px; font-size: 19px; color: #FFD98A; font-weight: 700; }
+.brief { margin: 0 0 8px; padding: 10px 14px; background: rgba(0,0,0,.25); border-radius: 8px; border: 1px solid rgba(231,169,53,.35); }
+.brief p { margin: 0 0 6px; font-size: 14px; }
+.brief p:last-child { margin-bottom: 0; }
+.brief b { color: var(--gold); margin-right: 6px; }
+.hint { margin-top: 6px; font-size: 13.5px; }
+.hint summary { cursor: pointer; color: var(--gold); font-weight: 700; }
+.hint p { margin: 6px 0 0; opacity: .92; }
+.goal { font-size: 14px; }
+.goal b { color: #FFCF7A; }
+.newwin { margin-left: 8px; font-size: 12px; color: var(--gold); }
+
+/* 검색대 화면 */
+main { max-width: 760px; margin: 20px auto; padding: 24px; background: #fff; border: 3px solid var(--bark); border-radius: 12px; }
+.desk { margin: 0 0 14px; font-size: 15px; color: var(--wood); }
+button {
+  padding: 8px 16px;
+  border: 0; border-radius: 8px;
+  background: linear-gradient(var(--leaf), var(--leaf-dk));
+  color: #fff; font-weight: 700; font-size: 15px;
+  cursor: pointer;
+}
+.search { display: flex; gap: 8px; margin-bottom: 16px; }
+.search input {
+  flex: 1; min-width: 0; padding: 8px 12px;
+  border: 2px solid var(--leaf); border-radius: 8px; font-size: 15px;
+  font-family: Consolas, 'Noto Sans KR', monospace;
+}
+.rows { width: 100%; border-collapse: collapse; }
+.rows th, .rows td { padding: 8px 10px; border-bottom: 1px solid #DDD0B8; text-align: left; vertical-align: top; }
+.rows th { background: var(--paper); font-size: 14px; }
+.rows td { font-size: 14px; word-break: break-all; }
+.empty { padding: 16px; border-radius: 8px; background: #F3E7D3; color: var(--wood); }
+.sqlerr {
+  padding: 12px 14px; border-radius: 8px;
+  background: #2b1511; color: #FFD3C9; border: 1px solid var(--cherry);
+  font-family: Consolas, monospace; font-size: 13.5px; word-break: break-all;
+}
+.sqlerr b { color: #FF9A86; margin-right: 6px; }
+.found {
+  margin-bottom: 14px; padding: 12px 16px; border-radius: 10px;
+  background: linear-gradient(#fff6df, #ffe9b8); border: 2px solid var(--gold);
+  font-size: 15px; font-weight: 700; color: #7a4e10;
+}
+.found b { color: #a8360f; }
+code { font-family: Consolas, monospace; font-size: 13px; background: var(--paper); padding: 1px 5px; border-radius: 4px; }

@@ -16,6 +16,7 @@ const ROOT = path.join(__dirname, '..');
 app.get('/', (req, res) => res.sendFile(path.join(ROOT, 'index.html')));
 ['css', 'js', 'assets'].forEach(d => app.use('/' + d, express.static(path.join(ROOT, d))));
 
+app.use('/ch1', require('./ch1'));
 app.use('/ch2', require('./ch2'));
 
 app.listen(config.port, () => console.log('KLOAD 서버: ' + config.origin));
