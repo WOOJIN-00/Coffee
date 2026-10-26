@@ -356,6 +356,9 @@
     var box = $('#dialog-text');
     box.className = 'dialog-text';
     box.innerHTML = '<span class="tag">[문제]</span> ' + esc(text);
+    // 실제 플래그가 있는 문제에서는 'test' 안내를 숨긴다 (혼동 방지)
+    var hint = $('.dialog-hint');
+    if (hint) hint.hidden = !!p.flagHash;
   }
   // 대사 상자: 전투 안내 문구 (잠시 후 문제 문구로 돌아감)
   function say(text, kind, ms) {
@@ -374,14 +377,37 @@
   }
 
   /* ---------- 문제 보기 ---------- */
+  // 구조화된 카드(상황·미션·힌트)를 가진 문제인지 (1장 SQL Injection 등)
+  function hasCard(p) { return !!(p.situation || p.mission); }
+  var TIER_CLASS = { '초급': 'easy', '중급': 'mid', '고급': 'hard' };
+  function questSec(label, body, extra) {
+    if (!body) return '';
+    return '<div class="quest-sec' + (extra ? ' ' + extra : '') + '"><h4>' + label + '</h4><p>' + esc(body) + '</p></div>';
+  }
+  function questCard(p) {
+    var meta = '<div class="quest-meta">';
+    if (p.tier) meta += '<span class="tier tier-' + (TIER_CLASS[p.tier] || 'easy') + '">' + esc(p.tier) + '</span>';
+    if (p.category) meta += '<span class="cat">' + esc(p.category) + '</span>';
+    if (p.dmg) meta += '<span class="dmg-chip">도끼 데미지 ' + p.dmg + '</span>';
+    meta += '</div>';
+    return meta +
+      (p.flavor ? '<p class="quest-flavor">' + esc(p.flavor) + '</p>' : '') +
+      questSec('상황', p.situation) +
+      questSec('미션', p.mission) +
+      questSec('공략 힌트', p.hint, 'hint');
+  }
+
   // 지도의 뚫은 문제(solved)와 전투 중 문제에서 함께 쓴다
   function openQuest(ch, no, solved) {
     var c = CHS[ch - 1];
     var p = DATA.problems[ch - 1][no - 1];
     $('#quest-eyebrow').textContent = c.id + '장 ' + c.name + ' · 문제 ' + p.no + ' / ' + MAX + (solved ? ' · 해결 완료' : '');
     $('#quest-title').textContent = p.title || '문제 준비 중';
-    $('#quest-desc').innerHTML = (p.desc ? esc(p.desc) : '아직 문제 내용이 정해지지 않았습니다.') +
-      (solved ? '<br>이미 뚫은 세이브 포인트입니다.' : p.flagHash ? '' : '<br>테스트 플래그 <code>test</code>를 입력하면 몬스터를 공격할 수 있습니다.');
+    var body = hasCard(p) ? questCard(p)
+      : '<p>' + (p.desc ? esc(p.desc) : '아직 문제 내용이 정해지지 않았습니다.') + '</p>';
+    var tail = solved ? '<p class="quest-note">이미 뚫은 세이브 포인트입니다.</p>'
+      : p.flagHash ? '' : '<p class="quest-note">테스트 플래그 <code>test</code>를 입력하면 몬스터를 공격할 수 있습니다.</p>';
+    $('#quest-desc').innerHTML = body + tail;
     // http(s) 주소만 허용한다
     var frame = $('#quest-frame');
     var ok = typeof p.url === 'string' && /^https?:\/\//i.test(p.url);
