@@ -34,7 +34,7 @@ module.exports = [
     flavor: '흔들어 보고 참·거짓을 가린다',
     situation: '이 나무는 비명도, 결과도 보여주지 않는다. 다만 흔들면 잎이 떨리거나(참) / 가만히 있거나(거짓) — 그 미세한 반응만이 유일한 신호다.',
     mission: '조건식(q)을 넣으면 그 조건이 참인지 거짓인지만 알려 준다. SUBSTRING 과 ASCII 비교로 숨긴 FLAG 를 한 글자씩 이진 탐색으로 추출하라.',
-    hint: 'SUBSTRING() 과 ASCII() 로 한 글자를 집고, 참/거짓 응답을 이진 탐색하면 요청 수를 크게 줄일 수 있다.',
+    hint: 'SUBSTR() 과 unicode() 로 한 글자를 집고, 참/거짓 응답을 이진 탐색하면 요청 수를 크게 줄일 수 있다. (이 환경은 SQLite 라 SUBSTRING()/ASCII() 가 아니라 SUBSTR()/unicode() 를 쓴다.)',
     ready: true
   },
   {
