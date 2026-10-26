@@ -37,12 +37,14 @@ button {
   color: #fff; font-weight: 700; font-size: 15px;
   cursor: pointer;
 }
-.search { display: flex; gap: 8px; margin-bottom: 16px; }
+.search { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 .search input {
-  flex: 1; min-width: 0; padding: 8px 12px;
+  flex: 1; min-width: 120px; padding: 8px 12px;
   border: 2px solid var(--leaf); border-radius: 8px; font-size: 15px;
   font-family: Consolas, 'Noto Sans KR', monospace;
 }
+.tip { padding: 8px 12px; border-radius: 8px; background: var(--paper); border: 1px solid #DDD0B8; font-size: 13px; color: var(--wood); margin: 0 0 12px; word-break: break-all; }
+.saved { margin: 0 0 14px; padding: 10px 14px; border-radius: 8px; background: #E5F4E4; font-size: 14px; }
 .rows { width: 100%; border-collapse: collapse; }
 .rows th, .rows td { padding: 8px 10px; border-bottom: 1px solid #DDD0B8; text-align: left; vertical-align: top; }
 .rows th { background: var(--paper); font-size: 14px; }

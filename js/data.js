@@ -75,7 +75,7 @@ window.GAME_DATA = {
   // 게임과 문제를 한 서버에서 내보내므로 접속한 주소를 그대로 쓴다 (파일로 직접 열었을 때만 로컬 서버 주소)
   var CH1_SERVER = (/^https?:/.test(location.protocol) ? location.origin : 'http://localhost:3000') + '/ch1/';
   // 실제 풀이 페이지(server/ch1)가 준비된 문제 번호. 준비된 문제만 '문제보기'에 페이지를 띄운다.
-  var CH1_READY = { 1: true };
+  var CH1_READY = { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true, 10: true };
   // [카테고리, 공격명(제목), 난이도, 데미지, 한 줄 도발, 상황, 미션, 공략 힌트, 플래그 해시]
   var CH1 = [
     ['UNION SELECT', '검색창 UNION 탈취', '초급', 10,
