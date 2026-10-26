@@ -17,8 +17,8 @@ module.exports = [
     no: 2, category: 'Error-based', step: '에러 염탐', tier: '초급',
     flavor: '나무의 비명에서 약점을 읽어라',
     situation: '나무 몬스터를 톡 건드리면 아파서 비명을 지른다. 그 비명 소리(에러 메시지) 속에 줄기 속살 — 직원 전용 메모가 그대로 묻어난다.',
-    mission: "로그인 폼(아이디·비밀번호)에 깨진 구문을 흘려 넣어 SQL 에러를 유발하고, 출력되는 에러 메시지에서 숨긴 메모(FLAG)를 읽어내라. extractvalue(), updatexml(), concat() 함수를 쓸 수 있다.",
-    hint: "extractvalue() 나 updatexml() 에 일부러 이상한 XPATH 를 주면, 그 XPATH 자리에 넣은 서브쿼리 결과가 에러 메시지에 그대로 실려 나온다.",
+    mission: "로그인 폼(아이디·비밀번호)에 깨진 구문을 흘려 넣어 SQL 에러를 유발하고, 출력되는 에러 메시지에서 숨긴 메모(FLAG)를 읽어내라. extractvalue(), updatexml(), concat() 함수를 쓸 수 있다. (이 환경은 SQLite 기반이다. 보통의 구문 에러는 SQLite 식 메시지로 뜨고, extractvalue()/updatexml() 만 MySQL 식 에러 함수를 흉내 낸 것이다.)",
+    hint: "extractvalue() 나 updatexml() 에 일부러 이상한 XPATH 를 주면, 그 XPATH 자리에 넣은 서브쿼리 결과가 에러 메시지에 그대로 실려 나온다. 단, AND 로 이으면 앞 조건이 거짓일 때 뒤가 평가되지 않아 에러 자체가 안 날 수 있다 — 반드시 평가되도록 연결 방식을 바꿔 보라.",
     ready: true
   },
   {
