@@ -266,11 +266,10 @@ router.post('/9/note', (req, res) => {
 });
 
 /* ========== 10번: WAF 우회 SQLi ========== */
-// 의도된 "엉성한" 블랙리스트: 대소문자와 띄어쓰기를 정확히 맞춘 형태만 막는다 (그래서 변형으로 우회할 수 있다).
+// 의도된 "엉성한" 블랙리스트: 대문자+띄어쓰기가 정확히 일치하는 "UNION SELECT" 만 막는다
+// (대소문자를 바꾸거나 공백을 주석으로 바꾸면 바로 통과한다 — 난이도를 낮추기 위해 OR/= 차단은 두지 않는다).
 function wafBlocked(q) {
   if (/UNION\s+SELECT/.test(q)) return 'UNION SELECT';
-  if (/\bOR\b/.test(q)) return 'OR';
-  if (/=/.test(q)) return '=';
   return null;
 }
 router.get('/10/play', (req, res) => {
